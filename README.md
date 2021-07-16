@@ -1,11 +1,20 @@
 # PlugShopifyVerifyTimestamp
 
-**TODO: Add description**
+When Shopify embeds your app into the Shopify Admin it also includes a bunch of variables in URL Parameters. Those are `shop`, `timestamp` and `hmac`. Together these variables allow you to verify the legitimacy of a request. This package allows you to verify the "timestamp" component (it does not validate it against the hmac) has not elapsed a configured window.
+
+## Usage
+In the pipeline you would like to timestamp verify, add `plug PlugShopifyVerifyTimestamp, max_delta: 5, halt_on_error: true` to create a 5 second grace period between the request being sent and it being recieved.
+
+```elixir
+pipeline :embedded do
+  plug PlugShopifyVerifyTimestamp, max_delta: 5, halt_on_error: true
+end
+```
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `plug_shopify_verify_timestamp` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `plug_shopify_verify_timestamp`
+to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -14,8 +23,3 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/plug_shopify_verify_timestamp](https://hexdocs.pm/plug_shopify_verify_timestamp).
-
