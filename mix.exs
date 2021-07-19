@@ -21,6 +21,7 @@ defmodule PlugShopifyVerifyTimestamp.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:versioce, "~> 1.1.1", only: :dev, runtime: false},
       {:phoenix, "~> 1.5.4"},
       {:plug_cowboy, "~> 2.0"},
       {:timex, "~> 3.7"}
